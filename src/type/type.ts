@@ -27,6 +27,9 @@ export interface GoalDataInfo {
   id: string;
 }
 
+export type GoalProps = {
+  data: GoalDataInfo;
+};
 
 // 거래 내역 데이터 타입
 export interface AccountHistoryInfo {
@@ -43,3 +46,20 @@ export interface AccountHistoryInfo {
 export type AccountHistoryProps = {
   dataset: AccountHistoryInfo[];
 };
+
+export type AccountHistoryCardProps = {
+  data: AccountHistoryInfo;
+};
+
+
+// 카테고리 데이터 타입
+export interface CategoryInfo {
+  id: number;
+  label: string;
+}
+
+export interface CategoryChartDataInfo{
+  id: number;
+  category: string;
+  total: number;
+}
