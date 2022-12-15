@@ -34,6 +34,7 @@ function CreateAccountHistory() {
     );
   }
 
+  // inputsInfo 타입 설정
   interface InputsInfo {
     accountType: string;
     year: string;
