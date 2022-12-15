@@ -9,6 +9,7 @@ import AccountHistory from "../components/AccountHistory/AccountHistory";
 import CreateAccountHistory from "../components/CreateAccountHistory";
 import AlarmModal from "../components/Modal/AlarmModal";
 import GoalModal from "../components/Modal/GoalModal";
+import CategoryModal from "../components/Modal/CategoryModal";
 
 function Main () {
   // 알람 모달, 목표 모달, 카테고리 추가 모달 현재 상태값 가져오기
@@ -83,7 +84,7 @@ function Main () {
       </AccountHistoryContainer>
       {currentAlarmState ? <AlarmModal /> : null}
       {currentGoalState ? <GoalModal /> : null}
-      {/* {currentCategoryState ? <CategoryModal /> : null} */}
+      {currentCategoryState ? <CategoryModal /> : null}
     </Wrapper>
   );
 }
