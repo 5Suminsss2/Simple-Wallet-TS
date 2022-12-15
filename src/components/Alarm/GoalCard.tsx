@@ -3,11 +3,7 @@ import { AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { goalDatasetState, totalState } from "../../store/atom";
 import axios from "axios";
-import { GoalDataInfo } from "../../type/type";
-
-type GoalProps = {
-  data: GoalDataInfo;
-};
+import { GoalProps } from "../../type/type";
 
 function GoalCard({ data }: GoalProps) {
   const total = useRecoilValue(totalState); //입금, 출금 모두 더한 금액
