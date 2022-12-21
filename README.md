@@ -5,6 +5,8 @@
 > Javacript 코드를 Typescript로 변환한 버전
 
 
+<br>
+
 ## 실행
 
 ```shell
@@ -18,6 +20,8 @@ json-server --watch data.json --port 4000 // DB server 실행
 `localhost:3000` : 로컬 접속
 
 
+<br>
+
 ## 사용
 
 - React
@@ -30,15 +34,21 @@ json-server --watch data.json --port 4000 // DB server 실행
 - Figma (레이아웃)
 - json-server (서버 라이브러리)
 
+<br>
+
 ## 목차
 
 - [기능](#기능)
 - [구현](#구현)
 - [트러블 슈팅](#트러블-슈팅)
 
+<br>
+
 ---
 
+
 ## 기능
+
 
 ### 반응형
 
@@ -48,6 +58,8 @@ json-server --watch data.json --port 4000 // DB server 실행
 | ----------------------- | -------------------------- |
 | ![](./docs/mobile.png) | ![](./docs/desktop.png) |
 
+
+<br>
 
 ### 알림 기능
 
@@ -59,12 +71,16 @@ json-server --watch data.json --port 4000 // DB server 실행
 | ---------------------- | ---------------------- |
 | ![](./docs/alarm.png) | ![](./docs/goal.png) |
 
+<br>
+
 ### 입출금 관리 기능
 
 | 총 입출금 금액 입력 시, 실시간 반영 | 총 입출금 금액 삭제 시, 실시간 반영 |
 | ----------------------------- | ----------------------------- |
 | ![](./docs/addAccount.gif) | ![](./docs/deleteAccount.gif) | 
  
+
+<br>
 
 ### 경제 뉴스 추천 기능
 
@@ -73,7 +89,11 @@ json-server --watch data.json --port 4000 // DB server 실행
 | ![](./docs/recommendNews.gif) |
 
 
+<br>
+
 ---
+
+<br>
 
 ## 구현
 
@@ -98,33 +118,35 @@ json-server --watch data.json --port 4000 // DB server 실행
 | `Chart`    | Main 페이지에 배치되는 차트 기능 관리 폴더 |
 | `Modal`    | 알람 기능과 목표 알림 기능을 추가할 수 있는 모달 관련 폴더 |
 | `News`    | NewApi를 활용하여 경제 뉴스 추천 기능 관리 폴더 |
-| `CreateAccountHistory.js`    | 입출금 등록 기능 파일 |
-| `Title.js`    | Main 화면의 Header 부분 관리 파일  |
-| `Total.js`    | 등록된 입출금 내역을 총 잔액, 총 입금, 총 출금으로 나눈 관리 기능 |
+| `CreateAccountHistory.tsx`    | 입출금 등록 기능 파일 |
+| `Title.tsx`    | Main 화면의 Header 부분 관리 파일  |
+| `Total.tsx`    | 등록된 입출금 내역을 총 잔액, 총 입금, 총 출금으로 나눈 관리 기능 |
 
 **src/pages**
 
 | 파일명 | 역할        |
 | ------ | ----------- |
-| `Main.js` | 메인 페이지 |
+| `Main.tsx` | 메인 페이지 |
 
 **src/store**
 
 | 파일명     | 역할             |
 | ---------- | ---------------- |
-| `atom.js` | Recoil로 상태관리할 수 있도록 컴포넌트가 구독할 수 있는 React State 모음 파일 |
+| `atom.ts` | Recoil로 상태관리할 수 있도록 컴포넌트가 구독할 수 있는 React State 모음 파일 |
 
 **src/hooks**
 
 | 파일명     | 역할             |
 | ---------- | ---------------- |
-| `usePromise.js` | api가 주는 비동기 데이터를 비동기적(Promise)으로 받아올 수 있게 도와주는 훅 |
+| `usePromise.ts` | api가 주는 비동기 데이터를 비동기적(Promise)으로 받아올 수 있게 도와주는 훅 |
 
 **src/api**
 
 | 파일명     | 역할             |
 | ---------- | ---------------- |
-| `getData.js` | 데이터를 받아오는 api 모음 파일 |
+| `getData.ts` | 데이터를 받아오는 api 모음 파일 |
+
+<br>
 
 ### 반응형
 1. media query로 반응형 웹 및 모바일 개발
@@ -139,45 +161,51 @@ json-server --watch data.json --port 4000 // DB server 실행
   }
 ```
 
+<br>
+
 ### 알림 기능
 1. 상태관리로 `Recoil`을 사용해 데이터 관리
-``` js
+``` ts
   const alarmDataset = useRecoilValue(alarmDatasetState); // useRecoilValue로 현재 기본값 가져오기
 ```
 2. 알람 및 목표 기능 생성을 위한 modal 구현
-``` js
+``` ts
   const [alarmOpen, setAlarmOpen] = useRecoilState(alarmModalState); // useRecoilState로 모달 기능 오픈 여부 확인
 ```
 3. 알람 및 목표 기능 추가 시, 기존 데이터베이스 값이 변경되는 것을 인지한 Recoil이 화면 상 데이터를 Refresh 없이 바꿈
-``` js
+``` ts
    const [dataset, setDataset] = useRecoilState(alarmDatasetState); // useRecoilState로 기존 데이터 가져오기
    setDataset([inputs, ...dataset]); // 데이터 수정
 ```
 
+<br>
+
 ### 입출금 입력 기능 
 1. 입출금 입력 시, Recoil을 통해 데이터 변화 관리
-``` js
+``` ts
    const [dataset, setDataset] = useRecoilState(datasetState); // useRecoilState로 기존 데이터 가져오기
    setDataset([inputs, ...dataset]); // 데이터 수정
 ```   
 2. axios로 입출금 데이터 Create, Read, Delete 기능 관리
-``` js
+``` ts
   await axios.post(`${process.env.REACT_APP_API_URL}/accountHistoryData`, inputs) // EX) axios post로 등록
   ...
 ```
 
+<br>
+
 ### 경제 뉴스 추천 기능 
 1. NewsApi에서 제공하는 무료 뉴스 데이터 api를 사용하여 경제 뉴스 추천 기능 구현
 2. promise를 사용하여 비동기적으로 데이터 처리
-``` js
-   // NewsContainer.js
+``` ts
+   // NewsContainer.tsx
    const [loading, response, error] = usePromise(() => {
       return axios.get(
         `https://newsapi.org/v2/top-headlines?country=kr&category=business&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
       );
     }, []);
     
-    // usePromise.js
+    // usePromise.ts
     export default function usePromise(promiseCreator, deps) {
       // 로딩중 / 완료 / 실패에 대한 상태 관리
       const [loading, setLoading] = useState(false);
@@ -206,12 +234,16 @@ json-server --watch data.json --port 4000 // DB server 실행
 ### 입출금 분석 그래프 기능 
 1. React 차트 라이브러리인 Nivo에서 Bar 그래프를 사용하여 입출금 분석 그래프 기능 구현
 
+<br>
+
 ### 카테고리 별 지출 분석 그래프 기능 
 1. React 차트 라이브러리인 Nivo에서 Pie 그래프를 사용하여 카테고리 별 지출 분석 그래프 기능 구현
 
+<br>
+
 ### 총 입출금 금액 계산 기능
 1. Recoil을 활용하여 총 입출금 계산 기능 구현
-``` js
+``` ts
   const [total, setTotal] = useRecoilState(totalState); // total 금액 가져오기
   let deposit = 0; 
   let withDraw = 0;
@@ -228,8 +260,11 @@ json-server --watch data.json --port 4000 // DB server 실행
   // 입출금 내역 금액 데이터 변경
   setTotal(deposit - withDraw);
 ```
+<br>
 
 ## 트러블 슈팅
+
+<br>
 
 ### 입출금 데이터 추가 시, 자동으로 차트에 반영이 되지 않는 이슈
 
@@ -238,7 +273,7 @@ json-server --watch data.json --port 4000 // DB server 실행
 
 **해결**
 1. 원인 분석
-``` js
+``` ts
   // 기존 코드
   const dataset = useRecoilValue(datasetState);
   const filterDataset = dataset.filter(
@@ -269,6 +304,7 @@ json-server --watch data.json --port 4000 // DB server 실행
 
 - 자세한 정리 : https://ksumin-dev.tistory.com/133
 
+<br>
 
 ### 데이터 삭제가 되지 않는 이슈
 
@@ -285,7 +321,7 @@ axios delete는 해당 데이터의 id를 찾아 삭제하는 방식으로 운�
 
 그렇기에, 임의의 id(기존 데이터 개수 + 1)를 데이터 생성할 때 넣어주었다.
 
-``` js
+``` ts
    const [dataset, setDataset] = useRecoilState(datasetState); //기존 데이터
    const [inputs, setInputs] = useState({
     accountType: "deposit",
@@ -300,7 +336,7 @@ axios delete는 해당 데이터의 id를 찾아 삭제하는 방식으로 운�
 이렇게 되면 문제점이, 총 3개의 데이터가 있고, id가 2인 데이터를 삭제한 후에 새 데이터를 등록하면 id가 3인 데이터로 생성되고 기존 id가 3이었던 데이터와 충돌하게 되어 등록이 되지 않는다.
 
 그래서 id를 숫자가 아닌 무작위의 문자 (uuid)를 생성하여 데이터 생성 시 id로 넣어주어 이슈를 해결하였다.
-``` js
+``` ts
    function uuidv4() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
       /[xy]/g,
@@ -322,8 +358,11 @@ axios delete는 해당 데이터의 id를 찾아 삭제하는 방식으로 운�
     id: uuid4(), // 기존 데이터 개수의 +1을 하여 id 구상
   });
 ```
+<br>
 
 ---
+
+<br>
 
 ## 학습한 내용
 
@@ -333,7 +372,7 @@ axios delete는 해당 데이터의 id를 찾아 삭제하는 방식으로 운�
 이 기술을 적용한 개발을 하는 것이 이번 프로젝트의 핵심 목표였기 때문에 Recoil의 주요 기능을 학습하고 적용했다.
 
 사용한 주요 기능은 다음과 같다.
-``` js
+``` ts
   // 주요 기능
   const [total, setTotal] = useRecoilState(totalState); // 1. useRecoilState : 기존 데이터를 수정할 수 있다.
   const goalDataset = useRecoilValue(goalDatasetState); // 2. useRecoilValue : 기존 데이터가 무엇인지 읽을 수 있다.(ReadOnly라서 수정 불가능)
@@ -341,6 +380,7 @@ axios delete는 해당 데이터의 id를 찾아 삭제하는 방식으로 운�
 
 리덕스처럼 복잡하게 개발하지 않고 atom과 useRecoil__ 기능들을 이용하면 간단하게 상태관리를 할 수 있다는 장점을 파악했다.
 
+<br>
 
 ### 서버를 개발하지 않고 REST API 구축하기
 이번 프로젝트는 프론트만 개발하여 진행해야했고 빠른 시간 내로 진행해야하는 시간 제약이 있었다. 
@@ -362,6 +402,7 @@ DB를 사용해야하는 상황이었는데 DB를 사용하기 위해선 백엔�
 - 기존에 json파일에 data를 넣어두었기 때문에 json-server로 진행하는 것이 이 프로젝트에서는 더 편리하다고 생각해 json-server를 선택했다.
 - 정말 간단하게 이용할 수 있어 백엔드 서버를 구축할 시간을 아낄 수 있었다. 
 
+<br>
 
 ### promise
 경제 뉴스 추천 기능을 만들기 위해서 외부 api를 사용했다.
@@ -372,7 +413,9 @@ DB를 사용해야하는 상황이었는데 DB를 사용하기 위해선 백엔�
 
 (참고 서적 : react를 다루는 기술 )
 
-``` js
+<br>
+
+``` ts
 import { useState, useEffect } from "react";
 
 // promiseCreator : promise를 만들어주는 함수, 데이터를 가져오는 함수(axios,fetch)가 들어가야한다.
@@ -402,6 +445,7 @@ export default function usePromise(promiseCreator, deps) {
   }
 
   ```
+<br>
 
 ### styled component 위치 
 CSS module을 주로 써와서 Styled-Component에 대해 학습하고 개발에 적용해봤다.
@@ -414,7 +458,7 @@ input 값이 바뀔 때마다 리렌더링이 되고 리렌더링 될 때, Style
 
 그래서 Component 함수 스코프 외부에 위치해야 리렌더링의 영향을 받지 않을 수 있다.
 
-
+<br>
 
 ## 그 외 기록들
 개발 블로그에 정리했다.
