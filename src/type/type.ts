@@ -63,3 +63,10 @@ export interface CategoryChartDataInfo{
   category: string;
   total: number;
 }
+
+// 뉴스 데이터 타입
+export interface articleDataInfo {
+  url: string;
+  title: string;
+  urlToImage: string;
+}

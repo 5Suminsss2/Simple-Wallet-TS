@@ -10,6 +10,7 @@ import CreateAccountHistory from "../components/CreateAccountHistory";
 import AlarmModal from "../components/Modal/AlarmModal";
 import GoalModal from "../components/Modal/GoalModal";
 import CategoryModal from "../components/Modal/CategoryModal";
+import NewsContainer from "../components/News/NewsContainer";
 
 function Main () {
   // 알람 모달, 목표 모달, 카테고리 추가 모달 현재 상태값 가져오기
@@ -76,7 +77,7 @@ function Main () {
       <ToatalAndGraph>
         <Total dataset={dataset} />
         <GraphAccount dataset={dataset} />
-        {/* <NewsContainer /> */}
+        <NewsContainer />
       </ToatalAndGraph>
       <AccountHistoryContainer>
         <AccountHistory dataset={dataset} />
