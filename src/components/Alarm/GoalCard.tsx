@@ -11,7 +11,7 @@ function GoalCard({ data }: GoalProps) {
   const [dataset, setDataset] = useRecoilState(goalDatasetState); // 기존 목표 내역
 
   // 목표 알림 제거하기
-  const handleRemove = async (id : number) => {
+  const handleRemove = async (id: string) => {
     let filtered = dataset.filter((element: object) => element !== data);
 
     await axios.delete(`${process.env.REACT_APP_API_URL}/goalData/${id}`).then(
@@ -38,7 +38,7 @@ function GoalCard({ data }: GoalProps) {
       <AlarmItemsclose
         type="button"
         onClick={() => {
-          handleRemove(Number(data.id));
+          handleRemove(data.id);
         }}
       >
         <AiOutlineClose />

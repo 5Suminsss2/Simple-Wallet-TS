@@ -11,7 +11,7 @@ function AlarmCard({ data }: AlarmProps) {
   const [dataset, setDataset] = useRecoilState(alarmDatasetState); // 기존 알람 내역
 
   // 목표 알림 제거하기
-  const handleRemove = async (id: number) => {
+  const handleRemove = async (id: string) => {
     let filtered = dataset.filter((element: object) => element !== data);
 
     await axios.delete(`${process.env.REACT_APP_API_URL}/alarmData/${id}`).then(
@@ -54,7 +54,7 @@ function AlarmCard({ data }: AlarmProps) {
       <AlarmItemsclose
         type="button"
         onClick={() => {
-          handleRemove(Number(data.id));
+          handleRemove(data.id);
         }}
       >
         <AiOutlineClose />
