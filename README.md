@@ -10,7 +10,7 @@
 ## 실행
 
 ```shell
-yarn add
+yarn
 
 yarn start // local 서버로 실행
 
